@@ -1,0 +1,54 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #f5f7fa;
+  background: #0b0f14;
+  font-synthesis: none;
+  --bg: #0b0f14;
+  --surface: #121820;
+  --surface-2: #171f29;
+  --border: #263241;
+  --primary: #168fff;
+  --primary-soft: rgba(22, 143, 255, .12);
+  --text: #f5f7fa;
+  --muted: #8996a5;
+  --success: #3ccb7f;
+  --warning: #f2a93b;
+  --danger: #ef5b5b;
+  --radius: 12px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--bg); color: var(--text); }
+button, input, textarea, select { font: inherit; }
+button { color: inherit; }
+a { color: inherit; }
+.popup-body { width: 400px; min-height: 520px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 15px; letter-spacing: -.02em; }
+.brand b { color: var(--primary); }
+.brand__mark { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: var(--primary); box-shadow: 0 0 24px rgba(22,143,255,.2); }
+.brand__mark svg { width: 17px; fill: none; stroke: white; stroke-width: 1.8; }
+.button { border: 1px solid transparent; border-radius: 9px; padding: 9px 14px; cursor: pointer; font-size: 13px; font-weight: 650; transition: .15s ease; }
+.button:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.08); }
+.button:disabled { opacity: .55; cursor: wait; }
+.button--primary { background: var(--primary); color: white; }
+.button--secondary { background: var(--surface-2); border-color: var(--border); }
+.button--danger { background: rgba(239,91,91,.1); border-color: rgba(239,91,91,.25); color: #ff8f8f; }
+.button--ghost { background: transparent; color: var(--muted); }
+.contact-form label { display: flex; flex-direction: column; gap: 7px; color: #aeb8c4; font-size: 12px; font-weight: 600; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.span-2 { grid-column: span 2; }
+input, textarea, select { width: 100%; border: 1px solid var(--border); background: #0e141b; color: var(--text); border-radius: 9px; padding: 10px 11px; outline: none; font-size: 13px; }
+input:focus, textarea:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22,143,255,.1); }
+textarea { resize: vertical; line-height: 1.5; }
+.important-field > span { color: #bedfff; }
+.important-field textarea { border-color: rgba(22,143,255,.42); background: rgba(22,143,255,.055); }
+.form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+.status-badge { display: inline-flex; width: fit-content; align-items: center; border-radius: 99px; padding: 5px 9px; background: rgba(137,150,165,.12); color: #b4c0cd; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.status-badge--connected, .status-badge--replied, .status-badge--conversation { color: #6fe1a2; background: rgba(60,203,127,.11); }
+.status-badge--invitation_sent, .status-badge--message_pending, .status-badge--message_sent { color: #68b9ff; background: rgba(22,143,255,.12); }
+.status-badge--closed, .status-badge--archived { color: var(--muted); }
+.empty-state { border: 1px dashed var(--border); border-radius: var(--radius); padding: 34px 20px; text-align: center; color: var(--muted); }
+.empty-state > span { color: var(--primary); font-size: 24px; }
+.empty-state h3 { color: var(--text); margin: 8px 0 5px; font-size: 14px; }
+.empty-state p { margin: 0; font-size: 12px; line-height: 1.55; }
+@media (max-width: 650px) { .form-grid { grid-template-columns: 1fr; } .span-2 { grid-column: span 1; } }
