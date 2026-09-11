@@ -17,6 +17,7 @@ type Backup = { version: 1; exportedAt: string; contacts: Contact[]; opportuniti
 
 const formatDate = (value?: string) => value ? new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(value)) : '—';
 const isDue = (value?: string) => Boolean(value && new Date(value) <= new Date());
+const formatListDate = (value?: string) => value ? new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).formatToParts(new Date(value)).filter(part => ['day', 'month', 'year'].includes(part.type)).map(part => part.value).join(' ') : '—';
 const compactName = (name: string) => {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   return parts.length > 2 ? `${parts[0]} ${parts.at(-1)}` : parts.join(' ');
@@ -183,7 +184,7 @@ function Dashboard() {
 function Stat({ label, value, tone = '' }: { label: string; value: number; tone?: string }) { return <article className={`stat stat--${tone}`}><span>{label}</span><strong>{value}</strong></article>; }
 
 function ContactRow({ contact, opportunity, onSelect, onStatus }: { contact: Contact; opportunity?: Opportunity; onSelect: () => void; onStatus: (status: ContactStatus) => void }) {
-  return <article className="contact-row" onClick={onSelect}><div className="contact-identity"><span className="avatar">{contact.name.charAt(0).toUpperCase()}</span><div><strong title={contact.name}>{compactName(contact.name)}</strong><small>{[contact.jobTitle, contact.company].filter(Boolean).join(' · ') || 'Sem cargo informado'}</small></div></div><div className="context-cell"><strong>{opportunity?.title ?? 'Sem oportunidade'}</strong><small>{contact.reason || 'Contexto não informado'}</small></div><StatusBadge status={contact.status} /><div className={isDue(contact.nextFollowUpAt) ? 'due' : ''}><small>{contact.nextFollowUpAt ? 'Follow-up' : 'Atualizado'}</small><strong>{formatDate(contact.nextFollowUpAt || contact.updatedAt)}</strong></div><select aria-label="Atualizar status" value={contact.status} onClick={e => e.stopPropagation()} onChange={e => onStatus(e.target.value as ContactStatus)}>{CONTACT_STATUSES.map(item => <option value={item} key={item}>{STATUS_LABELS[item]}</option>)}</select></article>;
+  return <article className="contact-row" onClick={onSelect}><div className="contact-identity"><span className="avatar">{contact.name.charAt(0).toUpperCase()}</span><div><strong title={contact.name}>{compactName(contact.name)}</strong><small>{[contact.jobTitle, contact.company].filter(Boolean).join(' · ') || 'Sem cargo informado'}</small></div></div><div className="context-cell"><strong>{opportunity?.title ?? 'Sem oportunidade'}</strong><small>{contact.reason || 'Contexto não informado'}</small></div><StatusBadge status={contact.status} /><div className={isDue(contact.nextFollowUpAt) ? 'due' : ''}><small>{contact.nextFollowUpAt ? 'Follow-up' : 'Atualizado'}</small><strong>{formatListDate(contact.nextFollowUpAt || contact.updatedAt)}</strong></div><select aria-label="Atualizar status" value={contact.status} onClick={e => e.stopPropagation()} onChange={e => onStatus(e.target.value as ContactStatus)}>{CONTACT_STATUSES.map(item => <option value={item} key={item}>{STATUS_LABELS[item]}</option>)}</select></article>;
 }
 
 
