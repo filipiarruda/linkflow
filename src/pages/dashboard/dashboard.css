@@ -32,8 +32,9 @@
 .contact-row { padding: 13px 17px; border-bottom: 1px solid rgba(38,50,65,.7); cursor: pointer; }
 .contact-row:last-of-type { border-bottom: 0; }
 .contact-row:hover { background: #151c25; }
-.contact-identity { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.contact-identity div, .context-cell, .contact-row > div { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.contact-identity { display: flex; flex-direction: row; align-items: center; gap: 10px; min-width: 0; }
+.contact-identity > div, .context-cell, .contact-row > .due { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.contact-identity .avatar { display: grid; place-items: center; flex: 0 0 auto; width: 32px; height: 32px; border: 1px solid rgba(22,143,255,.2); border-radius: 9px; background: var(--primary-soft); color: #8bcaff; font-size: 11px; font-weight: 750; }
 .contact-row strong { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .contact-row small { color: var(--muted); font-size: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .context-cell strong { color: #b8c4d0; }.context-cell small { max-width: 240px; }
